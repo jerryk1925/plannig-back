@@ -5,6 +5,7 @@
     "lib": ["es2017"],
     "outDir": "dist",
     "rootDir": "src",
+    "sourceMap": true,
     "noImplicitAny": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true

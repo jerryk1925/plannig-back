@@ -12,10 +12,10 @@ export class User extends BaseEntity {
 	@Column({ select: false })
 	public password: string;
 
-	@Column()
-	public firstName: string;
-
-	@Column()
-	public lastName: string;
+	// @Column()
+	// public firstName: string;
+	//
+	// @Column()
+	// public lastName: string;
 
 }
