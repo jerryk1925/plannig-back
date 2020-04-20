@@ -19,6 +19,8 @@ passport.use('local', new Strategy({
 		.where('user.username = :username', { username })
 		.addSelect('user.password') // get hidden column
 		.getOne();
+		console.log(dbUser)
+		console.log(username);
 		if (dbUser && comparePassword(password, dbUser.password)) {
 			return done(null, dbUser);
 		} else {
@@ -26,15 +28,18 @@ passport.use('local', new Strategy({
 		}
 		
 	} catch (error) {
+		console.log('error', error)
 		return done(error);
 	}
 }));
 
 passport.serializeUser((user: any, done): void => {
+	console.log('serializeUser')
 	done(null, user.id);
 });
 
 passport.deserializeUser(async (id: number, done) => {
 	const user = await User.getRepository().findOne({ id });
+	console.log('deserializeUser')
 	done(null, user);
 });
