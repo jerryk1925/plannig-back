@@ -13,21 +13,15 @@ passport.use('local', new Strategy({
 	usernameField: 'username',
 	passwordField: 'password',
 }, async (username, password, done) => {
-	console.log(done)
 	try {
 		const dbUser = await User.getRepository()
 		.createQueryBuilder('user')
 		.where('user.username = :username', { username })
 		.addSelect('user.password') // get hidden column
 		.getOne();
-		console.log(password)
-		console.log('--',dbUser.password)
-		console.log(comparePassword(password, dbUser.password))
 		if (dbUser && comparePassword(password, dbUser.password)) {
-			console.log('log')
 			return done(null, dbUser);
 		} else {
-			console.log('notlog')
 			return done(null, false);
 		}
 		

@@ -7,7 +7,7 @@ import { DefaultState, Context } from 'koa';
 
 import { User } from '../entity/user';
 
-const routes = new Router<DefaultState, Context>()
+const routes = new Router<DefaultState, Context>();
 
 routes
 .use('*', async (ctx, next) => {
@@ -16,6 +16,7 @@ routes
 })
 
 .use('/api/*', async (ctx, next) => {
+	console.log(1111, ctx.isUnauthenticated())
 	if (ctx.isUnauthenticated() ) {
 		console.info('is not auth');
 		ctx.redirect('/');
@@ -29,9 +30,19 @@ routes
 })
 
 .post('/login', async (ctx, next) => {
-	return passport.authenticate('local', {
-		successRedirect: '/api/users',
-		failureRedirect: '/'
+	const body: { [key: string]: string; } = ctx.request.body;
+	if (!body.password || !body.username) {
+		return false;
+	}
+
+	return passport.authenticate('local', function(err, user, info, status) {
+		if(!err) {
+
+			ctx.login(user);
+			console.log(ctx);
+			ctx.status = 200;
+			ctx.body = user;
+		}
 	})(ctx, next)
 })
 
@@ -40,7 +51,7 @@ routes
 		ctx.logout();
 		ctx.session = null;
 	}
-	
+
 	ctx.redirect('/');
 })
 
@@ -49,17 +60,16 @@ routes
 })
 
 .post('/register', async (ctx, next) => {
-	const body = ctx.request.body;
-	console.log(body)
+	const body: { [key: string]: string; } = ctx.request.body;
+
 	const schema = Joi.object().keys({
-		username: Joi.string(),
-		password: Joi.string(),
+		username: Joi.string().required(),
+		password: Joi.string().required(),
 		// firstName: Joi.string(),
 		// lastName: Joi.string()
 	});
 	
 	const result = Joi.validate(body, schema);
-	console.log(result)
 	if (result.error) {
 		console.error(JSON.stringify(result.error));
 		ctx.throw(400, result.error.message);
@@ -68,15 +78,17 @@ routes
 	// const salt = await bcrypt.genSalt();
 	// const hash = await bcrypt.hash(body.password, salt);
 	let userEntity = new User();
-	console.log(userEntity)
+	console.log('userEntity', userEntity)
 	Object.assign(userEntity, body);
 	//
 	userEntity = await getRepository(User).save(userEntity);
-	console.log(userEntity)
 	
-	return passport.authenticate('local', {
-		successRedirect: '/api/users',
-		failureRedirect: '/'
+	return passport.authenticate('local', async function(err, user, info, status) {
+		if(!err) {
+			ctx.status = 200;
+			ctx.body = await User.find();
+		}
+
 	})(ctx, next);
 })
 
