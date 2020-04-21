@@ -10,22 +10,6 @@ import { User } from '../entity/user';
 const routes = new Router<DefaultState, Context>();
 
 routes
-    .use('*', async (ctx, next) => {
-        console.info(`${ctx.method} ${ctx.request.url} ${JSON.stringify(ctx.request.body)}`);
-        return next();
-    })
-
-    .use('/api/*', async (ctx, next) => {
-        if (ctx.isUnauthenticated() ) {
-            ctx.status = 400;
-            ctx.body = {
-                error: ['Вы должны быть авторизированы']
-            };
-        }
-
-        return next();
-    })
-
     .post('/login', async (ctx, next) => {
         const body: { [key: string]: string; } = ctx.request.body;
         if (!body.password || !body.username) {
@@ -33,7 +17,6 @@ routes
         }
 
         return passport.authenticate('local', function(err, user, info, status) {
-            console.log('qweasdasdasddddddddddddddddddddddde',err)
             if(!err) {
                 ctx.login(user);
                 ctx.status = 200;
@@ -47,7 +30,6 @@ routes
             ctx.logout();
             ctx.session = null;
         }
-
     })
 
     .post('/register', async (ctx, next) => {
@@ -73,13 +55,28 @@ routes
         //
         userEntity = await getRepository(User).save(userEntity);
 
-        return passport.authenticate('local', async function(err, user, info, status) {
+        return passport.authenticate('local',  function(err, user, info, status) {
             if(!err) {
+                ctx.login(user);
                 ctx.status = 200;
-                ctx.body = await User.find();
+                ctx.body = user;
             }
 
         })(ctx, next);
-    });
+    })
+
+    .post('/api/auth', async (ctx, next) => {
+        if(ctx.isAuthenticated()) {
+            ctx.status = 200;
+            ctx.body = {
+                user: ctx.state.user
+            } ;
+        } else {
+            ctx.status = 200;
+            ctx.body = {
+                user: null,
+            }
+        }
+}   );
 
 export default routes;
