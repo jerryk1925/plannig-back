@@ -1,4 +1,4 @@
-import * as bcrypt from 'bcryptjs';
+// import * as bcrypt from 'bcryptjs';
 import  passport from 'koa-passport';
 import { Strategy } from 'passport-local';
 
