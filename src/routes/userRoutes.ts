@@ -1,5 +1,4 @@
 import  Router from 'koa-router';
-import  bcrypt from 'bcryptjs';
 import  Joi from 'joi';
 import  passport from 'koa-passport';
 import { getRepository } from 'typeorm';
