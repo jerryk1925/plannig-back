@@ -10,9 +10,9 @@ import { spaStatic } from './middleware/spaStatic';
 import { CONFIG_SESSION } from './config';
 
 import './auth/auth';
-import db from './db';
+// import db from './db';
 import userRoutes from './routes/userRoutes';
-import initRoutes from './routes/initRoutes';
+// import initRoutes from './routes/initRoutes';
 
 const koa = new Koa();
 
@@ -56,7 +56,7 @@ koa.use(spaStatic(
 
 koa.listen(8000);
 
-db.connect()
-	.then(() => console.log('Postgress connessdfdsfddct'))
-	.catch((error) => console.log('qweqwe',error));
+// db.connect()
+// 	.then(() => console.log('Postgress connessdfdsfddct'))
+// 	.catch((error) => console.log('qweqwe',error));
 
