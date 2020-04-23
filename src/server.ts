@@ -14,6 +14,8 @@ import './auth/auth';
 import userRoutes from './routes/userRoutes';
 // import initRoutes from './routes/initRoutes';
 
+const port : string|number= process.env.PORT || 8000;
+
 const koa = new Koa();
 
 koa.use(cors({
@@ -54,7 +56,7 @@ koa.use(spaStatic(
 ))
 
 
-koa.listen(8000);
+koa.listen(port);
 
 // db.connect()
 // 	.then(() => console.log('Postgress connessdfdsfddct'))
