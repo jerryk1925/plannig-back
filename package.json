@@ -4,7 +4,7 @@
   "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
-    "start": "yarn run build && yarn run prod:serve",
+    "start": "ts-node src/server.ts",
     "build": "yarn run tsc",
     "prod:serve": "nodemon --experimental-modules dist/server.js",
     "serve:prod": "ls && cd dist && ls",
