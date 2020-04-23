@@ -7,7 +7,7 @@
     "start": "yarn run build && yarn run prod:serve",
     "build": "yarn run tsc",
     "prod:serve": "nodemon --experimental-modules dist/server.js",
-    "serve:prod": "nodemon src/server.ts",
+    "serve:prod": "ts-node src/server.ts",
     "serve": "nodemon -L src/server.ts"
   },
   "dependencies": {
