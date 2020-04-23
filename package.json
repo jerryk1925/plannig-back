@@ -27,7 +27,8 @@
     "pg": "^8.0.0",
     "reflect-metadata": "^0.1.13",
     "nodemon": "^1.18.10",
-    "typeorm": "^0.2.24"
+    "typeorm": "^0.2.24",
+    "ts-node": "^8.8.2"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
@@ -41,7 +42,6 @@
     "@types/passport-local": "^1.0.33",
     "bcryptjs": "2.4.3",
     "rimraf": "^2.6.2",
-    "ts-node": "^8.8.2",
     "tslint": "^5.11.0",
     "tslint-config-airbnb": "^5.11.0",
     "typescript": "^3.1.3"
