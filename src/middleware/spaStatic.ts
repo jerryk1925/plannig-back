@@ -1,4 +1,4 @@
-import * as server from "koa-static";
+import  server from "koa-static";
 
 export const spaStatic = (matchReg = /^(?!\/api)/, staticReg = /^\/public/, root: string, opts: object) => {
 	return async (ctx: any, next: any) => {

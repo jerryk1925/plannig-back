@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import  Router from 'koa-router';
 import { DefaultState, Context } from 'koa';
 
 const initRoutes = new Router<DefaultState, Context>();

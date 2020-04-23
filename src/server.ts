@@ -1,11 +1,11 @@
 import 'reflect-metadata';
-import * as Koa from 'koa';
-import * as bodyParser from 'koa-bodyparser';
-import * as passport from 'koa-passport';
-import * as session from 'koa-session';
-import * as server from 'koa-static';
-import * as mount from 'koa-mount';
-import * as cors from '@koa/cors';
+import Koa from 'koa';
+import  bodyParser from 'koa-bodyparser';
+import  passport from 'koa-passport';
+import  session from 'koa-session';
+import  server from 'koa-static';
+import  mount from 'koa-mount';
+import cors from '@koa/cors';
 import { spaStatic } from './middleware/spaStatic';
 import { CONFIG_SESSION } from './config';
 
@@ -57,6 +57,6 @@ koa.use(spaStatic(
 koa.listen(8000);
 
 db.connect()
-	.then(() => console.log('Postgress connect'))
+	.then(() => console.log('Postgress connessdfdsfddct'))
 	.catch((error) => console.log('qweqwe',error));
 

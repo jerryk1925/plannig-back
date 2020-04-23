@@ -1,7 +1,7 @@
-import * as Router from 'koa-router';
-import * as bcrypt from 'bcryptjs';
-import * as Joi from 'joi';
-import * as passport from 'koa-passport';
+import  Router from 'koa-router';
+import  bcrypt from 'bcryptjs';
+import  Joi from 'joi';
+import  passport from 'koa-passport';
 import { getRepository } from 'typeorm';
 import { DefaultState, Context } from 'koa';
 

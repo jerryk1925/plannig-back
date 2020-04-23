@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import * as passport from 'koa-passport';
+import  passport from 'koa-passport';
 import { Strategy } from 'passport-local';
 
 import { User } from '../entity/user';
