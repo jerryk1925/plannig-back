@@ -3,7 +3,10 @@ import * as Koa from 'koa';
 import * as bodyParser from 'koa-bodyparser';
 import * as passport from 'koa-passport';
 import * as session from 'koa-session';
+import * as server from 'koa-static';
+import * as mount from 'koa-mount';
 import * as cors from '@koa/cors';
+import { spaStatic } from './middleware/spaStatic';
 import { CONFIG_SESSION } from './config';
 
 import './auth/auth';
@@ -11,9 +14,7 @@ import db from './db';
 import userRoutes from './routes/userRoutes';
 import initRoutes from './routes/initRoutes';
 
-
 const koa = new Koa();
-
 
 koa.use(cors({
 	credentials: true
@@ -39,6 +40,19 @@ koa.use(async (ctx, next) => {
 		ctx.body = err.message;
 	}
 })
+
+koa.use(mount('/', server( './public')))
+
+koa.use(server(__dirname + '/public'))
+
+
+koa.use(spaStatic(
+	/^(?!\/api)/,
+	/^\/public/,
+	__dirname + '/public',
+	{}
+))
+
 
 koa.listen(8000);
 
