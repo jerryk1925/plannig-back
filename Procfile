@@ -1,1 +1,1 @@
-web: yarn run serve:prod
+web: ls
