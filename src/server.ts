@@ -10,7 +10,7 @@ import { spaStatic } from './middleware/spaStatic';
 import { CONFIG_SESSION } from './config';
 
 import './auth/auth';
-// import db from './db';
+import db from './db';
 import userRoutes from './routes/userRoutes';
 // import initRoutes from './routes/initRoutes';
 
