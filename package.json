@@ -4,11 +4,10 @@
   "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
-    "start": "ls && ts-node src/server.ts",
+    "start": "ts-node src/server.ts",
     "build": "yarn run tsc",
     "prod:serve": "nodemon --experimental-modules dist/server.js",
-    "serve:prod": "ls && cd dist && ls",
-    "serve": "nodemon -L src/server.ts"
+    "serve": "nodemon src/server.ts"
   },
   "dependencies": {
     "@koa/cors": "2",
