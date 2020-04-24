@@ -60,7 +60,7 @@ koa.use(spaStatic(
 
 koa.listen(port);
 
-// db.connect()
-// 	.then(() => console.log('Postgress connessdfdsfddct'))
-// 	.catch((error) => console.log('qweqwe',error));
+db.connect()
+	.then(() => console.log('Postgress connessdfdsfddct'))
+	.catch((error) => console.log('qweqwe',error));
 
