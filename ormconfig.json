@@ -1,13 +1,28 @@
 {
   "name": "default",
   "type": "postgres",
-  "host": "localhost",
+  "host": "ec2-54-75-244-161.eu-west-1.compute.amazonaws.com",
   "port": 5432,
-  "username": "username",
-  "password": "password",
-  "database": "test",
+  "username": "pbhmqxvcjvuncz",
+  "password": "\n7467d90332e208de48e1ac0efa8f19e8d17edcd6b51286b920120861819003de",
+  "database": "d653q226qtf4v2",
   "synchronize": true,
   "entities": [
     "src/entity/*.ts"
   ]
 }
+
+//
+//{
+//  "name": "default",
+//  "type": "postgres",
+//  "host": "localhost",
+//  "port": 5432,
+//  "username": "username",
+//  "password": "password",
+//  "database": "test",
+//  "synchronize": true,
+//  "entities": [
+//    "src/entity/*.ts"
+//  ]
+//}

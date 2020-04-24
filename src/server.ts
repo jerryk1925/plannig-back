@@ -15,8 +15,6 @@ import userRoutes from './routes/userRoutes';
 // import initRoutes from './routes/initRoutes';
 
 const port : string|number= process.env.PORT || 8000;
-console.log(process.env);
-
 
 const koa = new Koa();
 
