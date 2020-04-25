@@ -4,6 +4,8 @@ import  passport from 'koa-passport';
 import { getRepository } from 'typeorm';
 import { DefaultState, Context } from 'koa';
 
+import logger from "../logger";
+
 import { User } from '../entity/user';
 
 const routes = new Router<DefaultState, Context>();
@@ -43,7 +45,7 @@ routes
 
         const result = Joi.validate(body, schema);
         if (result.error) {
-            console.error(JSON.stringify(result.error));
+            logger.error(JSON.stringify(result.error));
             ctx.throw(400, result.error.message);
         }
 

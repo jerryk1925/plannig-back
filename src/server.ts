@@ -5,7 +5,6 @@ import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
 import session from 'koa-session';
 import server from 'koa-static';
-import mount from 'koa-mount';
 import cors from '@koa/cors';
 import { spaStatic } from './middleware/spaStatic';
 import { CONFIG_SESSION } from './config';
@@ -44,10 +43,7 @@ koa.use(async (ctx, next) => {
 	}
 })
 
-koa.use(mount('/', server( './public')))
-
 koa.use(server(__dirname + '/public'))
-
 
 koa.use(spaStatic(
 	/^(?!\/api)/,
