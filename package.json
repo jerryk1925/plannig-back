@@ -4,16 +4,18 @@
   "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node src/server.ts",
+    "start": "cross-env NODE_ENV=production ts-node src/server.ts",
     "build": "yarn run tsc",
-    "prod:serve": "nodemon --experimental-modules dist/server.js",
-    "serve": "nodemon src/server.ts"
+    "serve": "cross-env NODE_ENV=development nodemon src/server.ts"
   },
   "dependencies": {
     "@koa/cors": "2",
+    "@types/dotenv": "^8.2.0",
     "@types/koa-mount": "^4.0.0",
     "@types/koa-static": "^4.0.1",
     "@types/koa__cors": "^3.0.1",
+    "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "joi": "^14.3.1",
     "koa": "^2.11.0",
     "koa-bodyparser": "^4.3.0",
@@ -22,12 +24,12 @@
     "koa-router": "^8.0.8",
     "koa-session": "^5.13.1",
     "koa-static": "^5.0.0",
+    "nodemon": "^1.18.10",
     "passport-local": "^1.0.0",
     "pg": "^8.0.0",
     "reflect-metadata": "^0.1.13",
-    "nodemon": "^1.18.10",
-    "typeorm": "^0.2.24",
-    "ts-node": "^8.8.2"
+    "ts-node": "^8.8.2",
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",

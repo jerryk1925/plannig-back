@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import './config/env'
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import passport from 'koa-passport';
