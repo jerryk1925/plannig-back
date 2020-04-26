@@ -33,12 +33,10 @@ passport.use('local', new Strategy({
 }));
 
 passport.serializeUser((user: any, done): void => {
-	console.log('serializeUser')
 	done(null, user.id);
 });
 
 passport.deserializeUser(async (id: number, done) => {
 	const user = await User.getRepository().findOne({ id });
-	console.log(user)
 	done(null, user);
 });
