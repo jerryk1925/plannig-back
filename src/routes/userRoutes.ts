@@ -32,6 +32,7 @@ routes
         }
         
         return passport.authenticate('local', function(err, user, info, status) {
+            console.log('qqqq',err)
             ctx.status = 200;
             if(!err) {
                 ctx.login(user);

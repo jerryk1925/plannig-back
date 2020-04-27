@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.a16177f30d8190b7b8531ed7af9650ee.js"
+  "/precache-manifest.34eba9842b4df2dd6ee415600c06c584.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "planner"});
