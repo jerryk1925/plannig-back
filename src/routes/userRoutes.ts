@@ -32,24 +32,20 @@ routes
         }
         
         return passport.authenticate('local', function(err, user, info, status) {
-            console.log('qqqq',err)
             ctx.status = 200;
             if(!err) {
                 ctx.login(user);
-                ctx.body = user;
+                ctx.body = {
+                    user
+                }
             } else{
                 ctx.body = {
-                    error: [ 'Сорян но такого юзера нет)']
+                    error: {
+                        all:  'Сорян но такого юзера нет)'
+                    }
                 };
             }
         })(ctx, next)
-    })
-
-    .get('/api/logout', async (ctx, next) => {
-        if (ctx.isAuthenticated()) {
-            ctx.logout();
-            ctx.session = null;
-        }
     })
 
     .post('/api/registration', async (ctx, next) => {
@@ -58,8 +54,6 @@ routes
         const schema = Joi.object().keys({
             username: Joi.string().required(),
             password: Joi.string().required(),
-            // firstName: Joi.string(),
-            // lastName: Joi.string()
         });
     
         const { error } = Joi.validate(body, schema, {abortEarly: false});
@@ -82,14 +76,17 @@ routes
             if(!err) {
                 ctx.login(user);
                 ctx.status = 200;
-                ctx.body = user;
+                ctx.body ={
+                    user
+                }
             }
 
         })(ctx, next);
     })
 
-    .post('/api/auth', async (ctx, next) => {
+    .get('/api/auth', async (ctx, next) => {
         if(ctx.isAuthenticated()) {
+            console.log(ctx.state)
             ctx.status = 200;
             ctx.body = {
                 user: ctx.state.user
@@ -100,6 +97,23 @@ routes
                 user: null,
             }
         }
-}   );
+    })
+
+    .get('/api/logout', async (ctx, next) => {
+        if (ctx.isAuthenticated()) {
+            ctx.logout();
+            ctx.session = null;
+            ctx.body = {
+                success: true
+            }
+        } else {
+            ctx.status = 200;
+            ctx.body = {
+                error: {
+                    all:  'Сорян но чтото пошло не так'
+                }
+            }
+        }
+    })
 
 export default routes;

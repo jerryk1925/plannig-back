@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["page404"],{"54e6":function(e,n,t){"use strict";t.r(n);var a=function(){var e=this,n=e.$createElement,t=e._self._c||n;return t("div",[e._v("Ooops такой странице нет")])},l=[],o={name:"Page404"},s=o,u=t("2877"),c=Object(u["a"])(s,a,l,!1,null,null,null);n["default"]=c.exports}}]);
-//# sourceMappingURL=page404.fe4cd2b9.js.map
+//# sourceMappingURL=page404.8df3404c.js.map

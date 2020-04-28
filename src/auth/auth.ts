@@ -18,16 +18,14 @@ passport.use('local', new Strategy({
 		.where('user.username = :username', { username })
 		.addSelect('user.password') // get hidden column
 		.getOne();
-		console.log('dbuser', dbUser)
 		if (dbUser && comparePassword(password, dbUser.password)) {
 			console.log('norm')
 			return done(null, dbUser);
 		} else {
-			return done(null, false);
+			return done(true, false);
 		}
 		
 	} catch (error) {
-		console.log('error', error)
 		return done(error);
 	}
 }));
