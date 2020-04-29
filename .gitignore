@@ -1,6 +1,6 @@
 node_modules
 dist
 .idea
-.env.development
-.env.production
+#.env.development
+#.env.production
 log
