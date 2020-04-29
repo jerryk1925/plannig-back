@@ -37,7 +37,6 @@ koa.use(async (ctx, next) => {
 	try {
 		await next();
 	} catch (err) {
-		console.log(err);
 		ctx.status = err.status || 500;
 		ctx.body = err.message;
 	}
@@ -56,6 +55,6 @@ koa.use(spaStatic(
 koa.listen(port);
 
 db.connect()
-	.then(() => console.log('Postgress connessdfdsfddct'))
-	.catch((error) => console.log('qweqwe',error));
+	.then(() => console.log('Postgress connect'))
+	.catch((error) => console.log(error));
 

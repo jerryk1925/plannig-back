@@ -19,7 +19,6 @@ passport.use('local', new Strategy({
 		.addSelect('user.password') // get hidden column
 		.getOne();
 		if (dbUser && comparePassword(password, dbUser.password)) {
-			console.log('norm')
 			return done(null, dbUser);
 		} else {
 			return done(true, false);

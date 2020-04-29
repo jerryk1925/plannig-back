@@ -3,10 +3,7 @@ import  Joi from 'joi';
 import  passport from 'koa-passport';
 import { getRepository } from 'typeorm';
 import { DefaultState, Context } from 'koa';
-
 import { parseJoiErrors } from "../lib/parseJoiErrors";
-import logger from "../logger";
-
 import { User } from '../entity/user';
 
 const routes = new Router<DefaultState, Context>();
@@ -64,7 +61,6 @@ routes
             };
             return;
         }
-        console.log(body)
         // const salt = await bcrypt.genSalt();
         // const hash = await bcrypt.hash(body.password, salt);
         let userEntity = new User();
@@ -86,7 +82,6 @@ routes
 
     .get('/api/auth', async (ctx, next) => {
         if(ctx.isAuthenticated()) {
-            console.log(ctx.state)
             ctx.status = 200;
             ctx.body = {
                 user: ctx.state.user
