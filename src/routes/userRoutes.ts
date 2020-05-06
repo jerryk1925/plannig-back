@@ -1,5 +1,5 @@
 import  Router from 'koa-router';
-import  Joi from 'joi';
+import Joi from 'joi';
 import  passport from 'koa-passport';
 import { getRepository } from 'typeorm';
 import { DefaultState, Context } from 'koa';

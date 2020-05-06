@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Wallet } from './wallet';
 
 @Entity()
 export class User extends BaseEntity {
@@ -11,5 +12,8 @@ export class User extends BaseEntity {
 
 	@Column({ select: false })
 	public password: string;
+	
+	@OneToMany(type => Wallet, wallet => wallet.user)
+	wallets: Wallet[];
 	
 }
