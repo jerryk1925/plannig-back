@@ -1,63 +1,67 @@
-import  Router from 'koa-router';
+import Router from 'koa-router';
 import Joi from 'joi';
-import  passport from 'koa-passport';
+import passport from 'koa-passport';
 import { getRepository } from 'typeorm';
 import { DefaultState, Context } from 'koa';
-import { parseJoiErrors } from "../lib/parseJoiErrors";
+import { parseJoiErrors } from '../lib/parseJoiErrors';
 import { User } from '../entity/user';
 
 const routes = new Router<DefaultState, Context>();
 
 routes
     .post('/api/login', async (ctx, next) => {
-        const body: { [key: string]: string; } = ctx.request.body;
-    
+        const body: { [key: string]: string } = ctx.request.body;
+
         const schema = Joi.object().keys({
-            username: Joi.string().required().error(() => 'Имя обязательное поле'),
-            password: Joi.string().required().error(() => 'Пароль обязательное поле'),
+            username: Joi.string()
+                .required()
+                .error(() => 'Имя обязательное поле'),
+            password: Joi.string()
+                .required()
+                .error(() => 'Пароль обязательное поле'),
             // firstName: Joi.string(),
             // lastName: Joi.string()
         });
-        
-        const { error } = Joi.validate(body, schema, {abortEarly: false});
-        if(error) {
-            ctx.status = 200
+
+        const { error } = Joi.validate(body, schema, { abortEarly: false });
+        if (error) {
+            ctx.status = 200;
             ctx.body = {
-                error: parseJoiErrors(error.details)
+                error: parseJoiErrors(error.details),
             };
             return;
         }
-        
-        return passport.authenticate('local', function(err, user, info, status) {
+
+        return passport.authenticate('local', function (err, user, info, status) {
             ctx.status = 200;
-            if(!err) {
+            if (!err) {
                 ctx.login(user);
                 ctx.body = {
-                    user
-                }
-            } else{
+                    user,
+                };
+            } else {
                 ctx.body = {
                     error: {
-                        all:  'Сорян но такого юзера нет)'
-                    }
+                        all: 'Сорян но такого юзера нет)',
+                    },
                 };
             }
-        })(ctx, next)
+        })(ctx, next);
     })
 
     .post('/api/registration', async (ctx, next) => {
-        const body: { [key: string]: string; } = ctx.request.body;
+        const body: { [key: string]: string } = ctx.request.body;
 
         const schema = Joi.object().keys({
             username: Joi.string().required(),
             password: Joi.string().required(),
         });
-    
-        const { error } = Joi.validate(body, schema, {abortEarly: false});
-        if(error) {
-            ctx.status = 200
+
+        const { error } = Joi.validate(body, schema, { abortEarly: false });
+        if (error) {
+            ctx.status = 200;
             ctx.body = {
-                error: parseJoiErrors(error.details)
+                error: parseJoiErrors(error.details),
             };
             return;
         }
@@ -68,29 +72,30 @@ routes
         //
         userEntity = await getRepository(User).save(userEntity);
 
-        return passport.authenticate('local',  function(err, user, info, status) {
-            if(!err) {
+        return passport.authenticate('local', function (err, user) {
+            console.log('qwe');
+            if (!err) {
                 ctx.login(user);
                 ctx.status = 200;
-                ctx.body ={
-                    user
-                }
+                ctx.body = {
+                    user,
+                };
             }
-
+            console.log(err);
         })(ctx, next);
     })
 
     .get('/api/auth', async (ctx, next) => {
-        if(ctx.isAuthenticated()) {
+        if (ctx.isAuthenticated()) {
             ctx.status = 200;
             ctx.body = {
-                user: ctx.state.user
-            } ;
+                user: ctx.state.user,
+            };
         } else {
             ctx.status = 200;
             ctx.body = {
                 user: null,
-            }
+            };
         }
     })
 
@@ -99,16 +104,16 @@ routes
             ctx.logout();
             ctx.session = null;
             ctx.body = {
-                success: true
-            }
+                success: true,
+            };
         } else {
             ctx.status = 200;
             ctx.body = {
                 error: {
-                    all:  'Сорян но чтото пошло не так'
-                }
-            }
+                    all: 'Сорян но чтото пошло не так',
+                },
+            };
         }
-    })
+    });
 
 export default routes;
