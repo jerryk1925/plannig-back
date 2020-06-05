@@ -19,8 +19,6 @@ routes
             password: Joi.string()
                 .required()
                 .error(() => 'Пароль обязательное поле'),
-            // firstName: Joi.string(),
-            // lastName: Joi.string()
         });
 
         const { error } = Joi.validate(body, schema, { abortEarly: false });
